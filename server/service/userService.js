@@ -40,7 +40,7 @@ module.exports.validUser = function(userExist, req, res, callback){
       else{
             hashService.hash(userExist[0].salt, req, res, function(err, req){
               if(userExist[0].password === req.body.password){
-                 valid = true;
+                 valid = userExist[0];
                 callback(null, valid, req, res);
               }
               else {
@@ -66,4 +66,17 @@ module.exports.changePass = function(valid, req, res, callback){
               })
         });
       }
+}
+
+
+module.exports.deleteUser = function(valid, req, res, callback){
+  if(!valid){
+    res.status(200).send("Incorrect Password");
+  }
+  else{
+    userModel.deleteUser(valid, function(err, result){
+    if(err) res.status(500).send("Server Update Error");
+    callback(null, result);
+    })
+  }
 }

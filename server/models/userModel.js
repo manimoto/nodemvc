@@ -28,3 +28,12 @@ module.exports.findUser = function(userName , done){
     done(null, row);
   })
 }
+
+
+module.exports.deleteUser = function(userDetails, done){
+  console.log(JSON.stringify(userDetails));
+  db.get().query('Delete from user where id = ? ' ,[userDetails.id], function(err, row){
+    if(err) return done(err)
+    done(null, row);
+  } )
+}

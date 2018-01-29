@@ -28,10 +28,10 @@ app.put('/updatePass' , function(req, res){
 
 
 app.delete('/deleteUser' , function(req, res){
-  userModel.findUser("manish", function(err, result){
+  async.waterfall([userService.userExist(req,res), userService.validUser, userService.deleteUser],function(err, result){
     if(err) res.status(500).send("Server Error")
-    res.status(200).send(result);
-  })
+    res.status(200).send("User Successfully Deleted !");
+  });
 })
 
 
