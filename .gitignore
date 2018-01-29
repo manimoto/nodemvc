@@ -1,0 +1,4 @@
+# ignore all logs
+**/node_modules
+**/keys
+**/keys.pub
