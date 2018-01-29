@@ -21,3 +21,10 @@ module.exports.findUser = function(userName , done){
     done(null, row);
   })
 }
+
+  module.exports.updatePass = function(userDetails, done){
+  db.get().query('Update user set password = ? where username = ?' , [userDetails.password ,userDetails.username] , function(err, row){
+    if(err) return done(err)
+    done(null, row);
+  })
+}

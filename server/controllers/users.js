@@ -20,10 +20,10 @@ app.post('/register', function(req, res){
 
 
 app.put('/updatePass' , function(req, res){
-  userModel.findUser("manish", function(err, result){
+  async.waterfall([userService.userExist(req,res), userService.validUser, userService.changePass],function(err, result){
     if(err) res.status(500).send("Server Error")
-    res.status(200).send(result);
-  })
+    res.status(200).send("Password Successfully Changed");
+  });
 })
 
 
